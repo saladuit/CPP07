@@ -16,6 +16,14 @@
 
 int main()
 {
+	Array<int> intArray(5);
+	Array<std::string> stringArray(5);
+	Array<Color> colorArray(5);
+
+	std::cout << "intArray size: " << intArray.size() << std::endl;
+	std::cout << "stringArray size: " << stringArray.size() << std::endl;
+	std::cout << "colorArray size: " << colorArray.size() << std::endl;
+
 	return (EXIT_SUCCESS);
 }
 

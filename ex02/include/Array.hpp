@@ -28,7 +28,7 @@ template <typename T> class Array
 	Array(unsigned int n);
 	Array(Array const &src);
 	~Array();
-	Array &operator=(Array const &rhs);
+	T &operator=(Array const &rhs);
 	T &operator[](unsigned int n);
 	unsigned int size() const;
 	class OutOfBoundsException : public std::exception
