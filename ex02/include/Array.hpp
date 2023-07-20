@@ -1,39 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                    .--.  _                 */
-/*   Iter.hpp                                        |o_o || |                */
+/*   Array.hpp                                       |o_o || |                */
 /*                                                   |:_/ || |_ _   ___  __   */
 /*   By: safoh <safoh@student.codam.nl>             //   \ \ __| | | \ \/ /   */
 /*                                                 (|     | )|_| |_| |>  <    */
-/*   Created: 2023/07/20 14:45:51 by safoh        /'\_   _/`\__|\__,_/_/\_\   */
-/*   Updated: 2023/07/20 14:45:51 by safoh        \___)=(___/                 */
+/*   Created: 2023/07/20 15:20:27 by safoh        /'\_   _/`\__|\__,_/_/\_\   */
+/*   Updated: 2023/07/20 15:20:27 by safoh        \___)=(___/                 */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-#define ITER_HPP
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
 #include <Color.hpp>
 #include <Defines.hpp>
 #include <iostream>
 
-template <typename T> void iter(T *array, size_t length, void (*f)(T &))
+template <typename T> class Array
 {
-	for (size_t i = 0; i < length; i++)
+  private:
+	T *_array;
+	unsigned int _size;
+
+  public:
+	Array();
+	Array(unsigned int n);
+	Array(Array const &src);
+	~Array();
+	Array &operator=(Array const &rhs);
+	T &operator[](unsigned int n);
+	unsigned int size() const;
+	class OutOfBoundsException : public std::exception
 	{
-		f(array[i]);
-	}
-}
-
-template <typename T> void print(T &x)
-{
-	std::cout << x << " ";
-}
-
-template <typename T> void increment(T &x)
-{
-	x++;
-}
+	  public:
+		virtual const char *what() const throw();
+	};
+};
 
 #endif
 
