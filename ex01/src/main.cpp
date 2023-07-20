@@ -10,24 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <Swap.hpp>
+#include <Iter.hpp>
 #include <cstdlib>
 #include <iostream>
 
 int main()
 {
-	int a = 2;
-	int b = 3;
-	::swap(a, b);
-	std::cout << "a = " << a << ", b = " << b << std::endl;
-	std::cout << "min( a, b ) = " << ::min(a, b) << std::endl;
-	std::cout << "max( a, b ) = " << ::max(a, b) << std::endl;
-	std::string c = "chaine1";
-	std::string d = "chaine2";
-	::swap(c, d);
-	std::cout << "c = " << c << ", d = " << d << std::endl;
-	std::cout << "min( c, d ) = " << ::min(c, d) << std::endl;
-	std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
+	int int_array[5] = {1, 2, 3, 4, 5};
+	char char_array[5] = {'a', 'b', 'c', 'd', 'd'};
+
+	std::cout << Color::green << "Testing with int array" << Color::reset
+			  << std::endl;
+	iter(int_array, 5, print);
+	std::cout << std::endl;
+	iter(int_array, 5, increment);
+	iter(int_array, 5, print);
+	std::cout << std::endl;
+	std::cout << Color::green << "Testing with char array" << Color::reset
+			  << std::endl;
+	iter(char_array, 5, print);
+	std::cout << std::endl;
+	iter(char_array, 5, increment);
+	iter(char_array, 5, print);
+	std::cout << std::endl;
 	return (EXIT_SUCCESS);
 }
 
