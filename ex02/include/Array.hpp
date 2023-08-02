@@ -58,7 +58,7 @@ const char *Array<T>::OutOfBoundsException::what() const throw()
 /* *******************************Constructors******************************* */
 
 template <typename T>
-Array<T>::Array() : _array(NULL), _size(0)
+Array<T>::Array() : _array(new T[0]), _size(0)
 {
 }
 
