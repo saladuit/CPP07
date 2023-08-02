@@ -27,9 +27,9 @@ class Array
   public:
 	Array();
 	Array(unsigned int n);
-	Array(Array const &src);
+	Array(Array<T> const &src);
 	~Array();
-	T &operator=(Array const &rhs);
+	Array<T> &operator=(Array<T> const &rhs);
 	T &operator[](unsigned int n);
 	unsigned int size() const;
 	class OutOfBoundsException : public std::exception
@@ -49,6 +49,12 @@ unsigned int Array<T>::size() const
 	return (this->_size);
 }
 
+template <typename T>
+const char *Array<T>::OutOfBoundsException::what() const throw()
+{
+	return ("Error: Out of bounds");
+}
+
 /* *******************************Constructors******************************* */
 
 template <typename T>
@@ -57,7 +63,7 @@ Array<T>::Array() : _array(NULL), _size(0)
 }
 
 template <typename T>
-Array<T>::Array(Array const &src)
+Array<T>::Array(Array<T> const &src) : _array(NULL), _size(src._size)
 {
 	*this = src;
 }
@@ -77,14 +83,18 @@ Array<T>::~Array()
 /* ********************************Overloads********************************* */
 
 template <typename T>
-T &Array<T>::operator=(Array const &rhs)
+Array<T> &Array<T>::operator=(Array<T> const &rhs)
 {
 	if (this != &rhs)
 	{
-		this->_array = rhs._array;
+		if (this->_array)
+			delete[] this->_array;
+		this->_array = new T[rhs._size];
+		for (size_t i = 0; i < rhs._size; i++)
+			this->_array[i] = rhs._array[i];
 		this->_size = rhs._size;
 	}
-	return (this);
+	return (*this);
 }
 
 template <typename T>
