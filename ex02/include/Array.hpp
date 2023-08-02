@@ -58,26 +58,25 @@ const char *Array<T>::OutOfBoundsException::what() const throw()
 /* *******************************Constructors******************************* */
 
 template <typename T>
-Array<T>::Array() : _array(new T[0]), _size(0)
+Array<T>::Array() : _array(new T[0]()), _size(0)
 {
 }
 
 template <typename T>
-Array<T>::Array(Array<T> const &src) : _array(NULL), _size(src._size)
+Array<T>::Array(Array<T> const &src) : _array(nullptr), _size(0)
 {
 	*this = src;
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n)
+Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n)
 {
 }
 
 template <typename T>
 Array<T>::~Array()
 {
-	if (this->_array)
-		delete[] this->_array;
+	delete[] this->_array;
 }
 
 /* ********************************Overloads********************************* */
@@ -87,8 +86,7 @@ Array<T> &Array<T>::operator=(Array<T> const &rhs)
 {
 	if (this != &rhs)
 	{
-		if (this->_array)
-			delete[] this->_array;
+		delete[] this->_array;
 		this->_array = new T[rhs._size];
 		for (size_t i = 0; i < rhs._size; i++)
 			this->_array[i] = rhs._array[i];

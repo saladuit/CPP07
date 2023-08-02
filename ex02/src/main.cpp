@@ -22,8 +22,10 @@
 int main(int, char **)
 {
 	Array<int> numbers(MAX_VAL);
+	Array<int> empty;
 	int *mirror = new int[MAX_VAL];
 	srand(time(NULL));
+	std::cout << empty.size() << std::endl;
 	for (int i = 0; i < MAX_VAL; i++)
 	{
 		const int value = rand();
